@@ -12,7 +12,6 @@ services:
             - 3000:3000
         volumes:
             - ./bx-file-transfer-service:/bx-file-transfer-service
-            - ./bx-file-transfer-service/node_modules:/bx-file-transfer-service/node_modules
         depends_on:
             - bx_broker
         networks:
