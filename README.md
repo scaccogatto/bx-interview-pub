@@ -7,7 +7,6 @@
 ## Index
 
 - [Description](#description)
-- [Installation](#installation)
 - [Running](#running)
 - [Test](#test)
 
@@ -15,35 +14,28 @@
 
 Repository based on [Nest](https://github.com/nestjs/nest) framework with typescript.
 
-This repository contains the Template for microservices, it communicates with the other services/microservices through a message broker.
+This repository is based on Template for microservices, it communicates with the other services/microservices through a message broker.
 
-## <a id="installation">🔗</a> Installation
+## Batteries included
 
-```bash
-yarn
-```
+The message broker is included for development purpose, in production it is an external instance.
 
-## <a id="running">🔗</a> Running the app
+## <a id="running">🔗</a> Running the containers
 
 ```bash
-# watch mode
-$ yarn start:dev
+# service run in watch mode
+docker-compose up -d
 
-# production mode
-$ yarn start:prod
+# stop all
+docker-compose down
 ```
 
 ## <a id="test">🔗</a> Test
 
 ```bash
 # unit tests
-$ yarn test
+docker-compose exec -it bx_file_transfer_service yarn test
 
-# e2e tests
-$ yarn test:e2e
-
-# test coverage
-$ yarn test:cov
 ```
 
 ---
