@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
     bx_file_transfer_service:
+        hostname: file-transfer.local
         container_name: bx_file_transfer_service
         build:
             context: ./bx-file-transfer-service
@@ -16,8 +17,13 @@ services:
             - bx_broker
         networks:
             - bx_network
+        environment:
+            MQTT_PROTOCOL: mqtt
+            MQTT_PORT: 1883
+            MQTT_HOST: broker.local
 
     bx_broker:
+        hostname: broker.local
         container_name: bx_broker
         image: emqx/emqx:5.1.1-elixir
         restart: always
@@ -39,4 +45,7 @@ services:
 
 networks:
     bx_network:
-        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.28.0.0/16
