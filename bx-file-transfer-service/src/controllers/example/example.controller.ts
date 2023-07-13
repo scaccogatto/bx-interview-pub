@@ -1,4 +1,4 @@
-import { Catch, Controller, Get, Inject, Logger } from '@nestjs/common';
+import { Catch, Controller, Inject, Logger } from '@nestjs/common';
 import { Ctx, MessagePattern, MqttContext, Payload } from '@nestjs/microservices';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { TopicForSubscriptionCollection } from '../../configs/env';
