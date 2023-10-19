@@ -14,12 +14,11 @@ services:
             - ./bx-file-transfer-service:/bx-file-transfer-service
         depends_on:
             - bx_broker
+            - bx_storage
         networks:
             - bx_network
-        environment:
-            MQTT_PROTOCOL: mqtt
-            MQTT_PORT: 1883
-            MQTT_HOST: broker.local
+        env_file:
+            - ./.env
 
     bx_broker:
         hostname: broker.local
@@ -41,6 +40,23 @@ services:
 
         networks:
             - bx_network
+
+    bx_storage:
+            hostname: storage.local
+            container_name: bx_storage
+            image: minio/minio
+            command: server /data --console-address ":9090"
+            restart: always
+            ports:
+                - 9000:9000
+                - 9090:9090
+            environment:
+                - MINIO_ROOT_USER=ROOTUSER
+                - MINIO_ROOT_PASSWORD=CHANGEME123
+            volumes:
+                - ./bx-storage/data:/data
+            networks:
+                - bx_network
 
 networks:
     bx_network:

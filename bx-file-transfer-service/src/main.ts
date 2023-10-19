@@ -10,6 +10,8 @@ import { DtoValidationException } from './exceptions/dto-validation-exception';
 import { AppModule } from './modules/app.module';
 import { handleBootstrapIssue } from './utils/handle-bootstrap-issue';
 import { validationErrorsMonitor } from './utils/validation-errors-monitor';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import modulePackage from 'package.json';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -34,7 +36,16 @@ async function bootstrap() {
     exceptionFactory,
   });
 
-  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('File Transfer Service')
+    .setDescription('File Transfer Service Swagger')
+    .setVersion(modulePackage.version)
+    .build();
+
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('api', app, document);
+
+  app.useLogger(loggerService);
   app.useGlobalPipes(globalValidationPipe);
   app.enableShutdownHooks();
 

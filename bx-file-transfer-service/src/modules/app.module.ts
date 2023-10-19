@@ -1,16 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ExampleController } from '../controllers/example/example.controller';
-import { PrettyMessagePreviewModule } from '../services/pretty-message-preview/pretty-message-preview.module';
 import { GlobalModule } from './global.module';
-import { MqttModule } from './mqtt.module';
+import { FilesModule } from 'src/files/files.module';
+import { StorageModule } from 'src/storage/storage.module';
 
 @Module({
-  imports: [
-    MqttModule.forRoot({ isGlobal: true }),
-    GlobalModule.forRoot({ isGlobal: true }),
-    PrettyMessagePreviewModule,
-  ],
-  controllers: [ExampleController],
+  imports: [GlobalModule.forRoot({ isGlobal: true }), FilesModule, StorageModule],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}

@@ -8,6 +8,7 @@ export const mqttConfig: ClientProviderOptions = {
   transport: Transport.MQTT,
   options: {
     url: MQTT_URL,
+    protocolVersion: 5,
   },
 };
 

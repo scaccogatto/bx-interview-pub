@@ -8,4 +8,6 @@ COPY . .
 RUN npm install -g yarn --force
 RUN yarn
 
+RUN npm install -g @nestjs/cli --force
+
 CMD ["yarn", "start:dev"]
